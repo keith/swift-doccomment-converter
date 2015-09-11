@@ -23,6 +23,7 @@ script="$(cd "$(dirname "$(readlink "${BASH_SOURCE[0]}")")" && pwd)/spacing.py"
 
 for file in "${files[@]}"
 do
+  echo "Converting ${file}"
   sed -E -i "" \
     "s/:param:[[:space:]]+([[:alpha:]]+)([[:space:]]+)/- parameter \1:\2/" \
     "$file"
