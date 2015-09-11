@@ -49,7 +49,7 @@ def spaced_lines(lines, regex):
             if index != first_char_index:
                 diff = first_char_index - index
                 assert(diff > 0)
-                new_line = re.sub("^([^:]*:)[ ]+", "\\1%s" %
+                new_line = re.sub("^([^: ]*:)[ ]+", "\\1%s" %
                                   (" " * (diff + 1)), line)
                 new_lines.append(new_line)
             else:
@@ -149,5 +149,5 @@ for file in files:
     return_ranges = get_ranges(param_content)
     return_content = fix_comments(param_content, return_ranges, RETURN_REGEX)
 
-    with open(file, "w") as writable:
-        writable.write("\n".join(return_content))
+    with open(file, "w") as outfile:
+        outfile.write("\n".join(return_content))
