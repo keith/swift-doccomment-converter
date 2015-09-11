@@ -30,7 +30,7 @@ def get_ranges(content):
 
 
 def longest_param(lines, regex):
-    longest = 0
+    longest = None
     for line in lines:
         if re.match(regex, line):
             index = line.index(":")
@@ -41,8 +41,11 @@ def longest_param(lines, regex):
 
 
 def spaced_lines(lines, regex):
-    new_lines = []
     first_char_index = longest_param(lines, regex)
+    if first_char_index is None:
+        return lines
+
+    new_lines = []
     for line in lines:
         if re.match(regex, line):
             index = line.index(":")
