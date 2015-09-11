@@ -49,14 +49,15 @@ def spaced_lines(lines, regex):
     for line in lines:
         if re.match(regex, line):
             index = line.index(":")
-            if index != first_char_index:
-                diff = first_char_index - index
-                assert(diff > 0)
-                new_line = re.sub("^([^: ]*:)[ ]+", "\\1%s" %
-                                  (" " * (diff + 1)), line)
-                new_lines.append(new_line)
-            else:
-                new_lines.append(line)
+            diff = first_char_index - index
+            assert(diff >= 0)
+
+            identifier_regex = "^([^:]*:)[ ]+"
+            assert(re.match(identifier_regex, line))
+
+            new_line = re.sub(identifier_regex, "\\1%s" %
+                              (" " * (diff + 1)), line)
+            new_lines.append(new_line)
         else:
             new_lines.append(line)
 
