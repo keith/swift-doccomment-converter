@@ -27,5 +27,5 @@ do
     "s/:param:[[:space:]]+([[:alpha:]]+)([[:space:]]+)/- parameter \1:\2/" \
     "$file"
   sed -E -i "" "s/:returns:([[:space:]]+)/- returns:\1/" "$file"
-  python "$script" "$file"
+  python "$script" "$max" "$file"
 done
