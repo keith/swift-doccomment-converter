@@ -1,0 +1,31 @@
+#!/bin/bash
+
+set -e
+
+usage() {
+  echo "Usage: $(basename "$0"): [LINELENGTH] [FILES...]"
+  exit 1
+}
+
+if [[ $# -lt 2 ]]; then
+  usage
+fi
+
+max="$1"
+shift
+
+if ! [[ $max =~ ^[0-9]+$ ]]; then
+  usage
+fi
+
+files=("$@")
+script="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)/spacing.py"
+
+for file in "${files[@]}"
+do
+  sed -E -i "" \
+    "s/:param:[[:space:]]+([[:alpha:]]+)([[:space:]]+)/- parameter \1:\2/" \
+    "$file"
+  sed -E -i "" "s/:returns:([[:space:]]+)/- returns:\1/" "$file"
+  python "$script" "$file"
+done
