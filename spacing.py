@@ -73,7 +73,7 @@ def join_params(lines, regex):
                     accum = None
                 in_identifier = False
                 new_lines.append(line)
-            elif re.match(regex, line):
+            elif re.match(PARAM_REGEX, line) or re.match(RETURN_REGEX, line):
                 if accum is not None:
                     new_lines.append(accum)
                 accum = line
