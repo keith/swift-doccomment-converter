@@ -5,7 +5,7 @@ import re
 PARAM_REGEX = "^[ ]*- parameter[ ]+"
 RETURN_REGEX = "^[ ]*- returns:[ ]+"
 
-line_length = sys.argv[1]
+line_length = int(sys.argv[1])
 files = sys.argv[2:]
 
 
