@@ -19,7 +19,7 @@ if ! [[ $max =~ ^[0-9]+$ ]]; then
 fi
 
 files=("$@")
-script="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)/spacing.py"
+script="$(cd "$(dirname "$(readlink "${BASH_SOURCE[0]}")")" && pwd)/spacing.py"
 
 for file in "${files[@]}"
 do
