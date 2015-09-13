@@ -1,0 +1,19 @@
+#!/bin/bash
+
+status=0
+
+files=(tests/*.swift)
+for file in "${files[@]}"
+do
+  ./convert-comments 110 "$file"
+  diff <(git diff "$file") "${file%.*}.diff"
+
+  diff_code=$?
+  if [[ $diff_code -gt 0 ]]; then
+    status=$diff_code
+  fi
+
+  git checkout "$file"
+done
+
+exit $status
